@@ -2,11 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Login from './Login';
+import Nav from './Nav';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import "firebase/database";
+import "firebase/app";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+    <div>
+    <Nav />
+    <Route path="/login" component={Login}/>
+    <Route  path="/" exact component={App}/>
+    </div>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
