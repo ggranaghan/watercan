@@ -1,23 +1,27 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import "firebase/auth";
 import firebase from "firebase/app";
+import { AuthContext } from './AuthContext';
 require('dotenv').config();
+
+
 
 function Nav() {
 
-    const [authState, updateAuthState] = useState(false);
+  
+    const {authStateContext, setAuthStateContext} = useContext(AuthContext);
+   
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
       if(firebaseUser){
-          updateAuthState(true)
           console.log("in")
+          setAuthStateContext(true)
       }
       else{
-        updateAuthState(false)
         console.log("out")
+        setAuthStateContext(false)
       }
       });
 
@@ -35,7 +39,7 @@ function Nav() {
     <nav className="nav">
       <h2>Nav Bar</h2>
       <ul className="links">
-          { authState
+          { authStateContext
           ?
           <Link style={linkStyle} to="/login">
         <li onClick={logOut}>

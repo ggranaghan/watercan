@@ -2,7 +2,6 @@ import './App.css';
 import firebase from "firebase/app";
 import "firebase/app";
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 require('dotenv').config();
 require("firebase/database");
 require("firebase/app")
@@ -41,7 +40,7 @@ function App() {
         console.log(err)
     }
     //Callback of the ref.on() method that does something with the data when it is recieved 
-     function gotData(ref) {
+      function gotData(ref) {
       var snapshot = ref.val();
       if (snapshot !== null){
       var keys = Object.keys(snapshot);

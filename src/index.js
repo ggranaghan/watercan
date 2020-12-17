@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './Login';
 import Nav from './Nav';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import "firebase/database";
-import "firebase/app";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
+// function PrivateRoute({ children, ...rest }) {
+//   let auth = useAuth();
+//   return (
+//     <Route
+//       {...rest}
+//       render={({ location }) =>
+//         auth.user ? (
+//           children
+//         ) : (
+//           <Redirect
+//             to={{
+//               pathname: "/login",
+//               state: { from: location }
+//             }}
+//           />
+//         )
+//       }
+//     />
+//   );
+// }
+function AppRouter() {
+
+  const [authStateContext, setAuthStateContext] = useState(null);
+
+
+return (
 ReactDOM.render(
   <React.StrictMode>
     <Router>
     <div>
+    <AuthContext.Provider value={{authStateContext, setAuthStateContext}}>
     <Nav />
     <Route path="/login" component={Login}/>
     <Route  path="/" exact component={App}/>
+    </AuthContext.Provider>
     </div>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
-);
+));
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

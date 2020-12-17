@@ -1,9 +1,7 @@
 import './App.css';
-import App from './App';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "firebase/auth";
 import firebase from "firebase/app";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 require("firebase/app")
 require("firebase/auth")
 require('dotenv').config();
