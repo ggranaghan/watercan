@@ -19,20 +19,21 @@ var config = {
 
 //Initizalizes firebase
 firebase.initializeApp(config);
+
 var database = firebase.database();
 
 function App() {
+  console.log("hello")
   let keyNum = 0;
   let items;
-  var ref = database.ref("data");
+ 
 
-  //const [dbObject, updateDbObject] = useState();
 
   const [displayData, updateDisplay] = useState(['Data will appear here']);
   const [inputField, updateInputField] = useState('');
 
   useEffect(() => { 
-
+    var ref = database.ref("data");
     ref.once("value", gotData, handleError);
 
     function handleError(err) {
@@ -52,7 +53,7 @@ function App() {
       updateDisplay(response.reverse())  
     }
   }  
-  });
+  },);
 
   (function() {
     items = displayData.map(function(item){

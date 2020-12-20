@@ -2,6 +2,7 @@ import './App.css';
 import "firebase/auth";
 import firebase from "firebase/app";
 import React, { useEffect } from 'react';
+
 require("firebase/app")
 require("firebase/auth")
 require('dotenv').config();
@@ -26,7 +27,7 @@ function Login() {
     useEffect(() => { 
         ui.start('#firebaseui-auth-container', uiConfig);
         });
- 
+
   return (
 <div>
 <h1 style={{textAlign: "center"}}>Sign in or create an account below</h1>
