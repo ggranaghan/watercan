@@ -3,35 +3,41 @@ import './index.css';
 import App from './App';
 import Login from './Login';
 import Nav from './Nav';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 
 
 function AppRouter() {
 
-  const [authStateContext, setAuthStateContext] = useState(null);
+  const [authStateContext, setAuthStateContext] = useState(true);
 
-  function PrivateRoute({ children, ...rest }) {
+  function PrivateRoute({
+    children,
+    ...rest
+  }) {
+    console.log(authStateContext)
     return (
       <Route
         {...rest}
-        render= {({ location }) =>
-         authStateContext ? (
-            children
-          ) 
-          : null
-        //   (
-        //     <Redirect
-        //       to={{
-        //         pathname: "/login",
-        //         state: { from: location }
-        //       }}
-        //     />
-        //   )
-        }
+        render= {props => {
+        if (authStateContext) {
+          console.log(authStateContext)
+            return (children)
+        } else {
+          console.log(authStateContext)
+          return (
+          <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: props.location }
+              }}
+            />
+          )
+        }      
+      }}
       />
     );
-  }
+  }    
 
 return (
 
@@ -42,7 +48,7 @@ return (
     <Route path="/login">
         <Login />
     </Route>
-    <PrivateRoute path="/" exact>
+    <PrivateRoute exact path="/">
         <App />
     </PrivateRoute>
     </AuthContext.Provider>

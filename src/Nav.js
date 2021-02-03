@@ -10,44 +10,43 @@ require('dotenv').config();
 
 function Nav() {
 
-  
-    const {authStateContext, setAuthStateContext} = useContext(AuthContext);
-   
 
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-      if(firebaseUser){
-          console.log("in")
-          setAuthStateContext(true)
-      }
-      else{
-        console.log("out")
-        setAuthStateContext(false)
-      }
-      });
+  const { authStateContext, setAuthStateContext } = useContext(AuthContext);
 
-    const linkStyle = {
-        color: 'black',
-        textDecoration: 'none',
-        hover: 'white'
-    };
 
-    function logOut () {
-        firebase.auth().signOut();
-    };
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+
+    if (firebaseUser) {
+      setAuthStateContext(true)
+    }
+    else {
+      setAuthStateContext(false)
+    }
+  });
+
+  const linkStyle = {
+    color: 'black',
+    textDecoration: 'none',
+    hover: 'white'
+  };
+
+  function logOut() {
+    firebase.auth().signOut();
+  };
 
   return (
     <nav className="nav">
-      <h2>Nav Bar</h2>
+      <h2>Firebase App</h2>
       <ul className="links">
-          { authStateContext
+        {authStateContext
           ?
           <Link style={linkStyle} to="/login">
-        <li onClick={logOut}>
-            Logout
+            <li onClick={logOut}>
+            🚪 Logout
         </li>
-        </Link>
-        :
-        null
+          </Link>
+          :
+          null
         }
       </ul>
     </nav>

@@ -10,7 +10,8 @@ ul {
 }
 nav {
   display: flex;
-  justify-content: space-around;
+  padding: 0 40px;
+  justify-content: space-between;
   align-items: center;
   min-height: 10vh;
   background-color: lightblue;
@@ -18,7 +19,6 @@ nav {
 
 }
 .links {
-  width: 40%;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
